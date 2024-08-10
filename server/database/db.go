@@ -56,9 +56,9 @@ func hashPassword(password string) (string, error) {
 
 func populateDB() {
 	users := []models.User{
-		{Email: "user1@server.net", Password: "password1"},
-		{Email: "user2@server.net", Password: "password2"},
-		{Email: "user3@server.net", Password: "password3"},
+		{Email: "user1@server.net", Password: "Pa$$word1"},
+		{Email: "user2@server.net", Password: "Pa$$word2"},
+		{Email: "user3@server.net", Password: "Pa$$word3"},
 	}
 	
 	for _, user := range users {
