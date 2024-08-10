@@ -5,9 +5,13 @@ import (
 	"log"
 	"net/http"
 	"auth/handlers"
+	"auth/database"
 )
 
+
 func main() {
+
+	database.InitDB()
 
 	router := http.NewServeMux()
 

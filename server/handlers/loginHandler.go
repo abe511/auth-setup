@@ -1,18 +1,17 @@
 package handlers
 
 import (
-	"fmt"
+	"auth/models"
 	"encoding/json"
+	"fmt"
 	"net/http"
+
+	// "golang.org/x/crypto/bcrypt"
 )
 
-type User struct {
-	Email 		string	`json:"email"`
-	Password	string	`json:"password"`
-}
 
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
-	var user User
+	var user models.User
 	err := json.NewDecoder(r.Body).Decode(&user)
 	fmt.Printf("email: %v, password: %v\n", user.Email, user.Password)
 	if err != nil {
