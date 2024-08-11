@@ -8,8 +8,31 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"time"
 )
+
+func sendErrorResponse(w http.ResponseWriter, message string, status int) {
+	w.Header().Set("Content-type", "application/json")
+	w.WriteHeader(status)
+	errorResponse := map[string]string{"message": message}
+	json.NewEncoder(w).Encode(errorResponse)
+}
+
+// validate request
+func hasValidCredentials(w http.ResponseWriter ,user models.User) bool {
+	if user.Email == "" || user.Password == "" {
+		sendErrorResponse(w, "User email and password are required", http.StatusBadRequest)
+		return false
+	}
+	if !utils.IsValidEmail(user.Email) {
+		sendErrorResponse(w, "Invalid email", http.StatusBadRequest)
+		return false
+	}
+	if !utils.IsValidPassword(user.Password) {
+		sendErrorResponse(w, "Invalid password", http.StatusBadRequest)
+		return false
+	}
+	return true
+}
 
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	var user models.User
@@ -18,19 +41,9 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		sendErrorResponse(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	// validate request
-	if user.Email == "" || user.Password == "" {
-		sendErrorResponse(w, "User email and password are required", http.StatusBadRequest)
+	if !hasValidCredentials(w, user) {
 		return
 	}
-	if !utils.IsValidEmail(user.Email) {
-		sendErrorResponse(w, "Invalid email", http.StatusBadRequest)
-		return
-	}
-	if !utils.IsValidPassword(user.Password) {
-		sendErrorResponse(w, "Invalid password", http.StatusBadRequest)
-		return
-	}	
 	// search by email in the db
 	var id int
 	var passwordHash string
@@ -49,16 +62,20 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		sendErrorResponse(w, "Wrong password", http.StatusForbidden)
 		return
 	}
-	// if password hashes match - generate token and send it with response status 200
-	token := fmt.Sprintf("Bearer %d", time.Now().Unix())
+	// if password hashes match - generate token
+	token, err := utils.HashString(user.Email + user.Password)
+	if err != nil {
+		sendErrorResponse(w, "Token generation failed", http.StatusInternalServerError)
+	}
+	// write new token to the db
+	_, err = database.DB.Exec("UPDATE test_users SET token = $1 WHERE email = $2 ", token, user.Email)
+	if err != nil {
+		sendErrorResponse(w, "Token update failed", http.StatusInternalServerError)
+		return
+	}
+	// send the token with response status 200
+	tokenString := fmt.Sprintf("Bearer %s", token)
 	w.Header().Set("Content-type", "application/json")
-	response := map[string]string{"accessToken": token}
+	response := map[string]string{"accessToken": tokenString}
 	json.NewEncoder(w).Encode(response)
-}
-
-func sendErrorResponse(w http.ResponseWriter, message string, status int) {
-	w.Header().Set("Content-type", "application/json")
-	w.WriteHeader(status)
-	errorResponse := map[string]string{"message": message}
-	json.NewEncoder(w).Encode(errorResponse)
 }

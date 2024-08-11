@@ -16,7 +16,7 @@ func main() {
 	router := http.NewServeMux()
 
 	router.HandleFunc("POST /login", handlers.LoginHandler)
-	router.HandleFunc("GET /profile", handlers.GetProfile)
+	router.HandleFunc("GET /profile", handlers.AuthMiddleware(handlers.GetProfile))
 
 	server := http.Server{
 		Addr: ":8080",
