@@ -36,17 +36,17 @@ func hasValidCredentials(w http.ResponseWriter ,user models.User) bool {
 
 // search user by email in the db
 func searchByEmail(w http.ResponseWriter, user models.User) (string, error) {
-		var passwordHash string
-		err := database.DB.QueryRow("SELECT password FROM test_users WHERE email = $1", user.Email).Scan(&passwordHash)
-		// if user not found - respond with 403 error
-		if err != nil {
-			if err == sql.ErrNoRows {
-				sendErrorResponse(w, "User not found", http.StatusForbidden)
-			} else {
-				sendErrorResponse(w, err.Error(), http.StatusInternalServerError)
-			}
+	var passwordHash string
+	err := database.DB.QueryRow("SELECT password FROM test_users WHERE email = $1", user.Email).Scan(&passwordHash)
+	// if user not found - respond with 403 error
+	if err != nil {
+		if err == sql.ErrNoRows {
+			sendErrorResponse(w, "User not found", http.StatusForbidden)
+		} else {
+			sendErrorResponse(w, err.Error(), http.StatusInternalServerError)
 		}
-		return passwordHash, err
+	}
+	return passwordHash, err
 }
 
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
