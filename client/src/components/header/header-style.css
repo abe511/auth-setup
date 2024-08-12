@@ -6,39 +6,26 @@ header {
   gap: 2rem;
 }
 
-nav {
-  display: flex;
-  background-color: white;
-  border: 1px solid #66837E;
-  height: fit-content;
-  /* padding: 0.2rem 1rem; */
-  /* gap: 1rem; */
-  border-radius: 1rem;
-  /* overflow: hidden; */
-}
-
-nav button {
-  color: #66837E;
-  padding: 0.2rem 1rem;
-  font-size: 1.25rem;
-}
-
 header > :last-child {
   margin-left: auto;
 }
 
-nav > button:first-child:hover {
-  border-top-left-radius: 0.75rem;
-  border-bottom-left-radius: 0.75rem;
+nav {
+  display: flex;
+  background-color: #66837E;
+  border: 2px solid #66837E;
+  height: fit-content;
+  border-radius: 1rem;
+  overflow: hidden;
+
 }
 
-nav > button:last-child:hover {
-  border-top-right-radius: 0.75rem;
-  border-bottom-right-radius: 0.75rem;
+.nav-btn {
+  border: none;
+  border-radius: 0;
 }
 
-/* header button:hover { */
-nav > button:hover {
+.nav-btn.active {
   color: white;
   background-color: #66837E;
 }

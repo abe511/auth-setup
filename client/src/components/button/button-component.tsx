@@ -1,16 +1,15 @@
 import "./button-style.css";
 
-
 type ButtonProps = {
   id?: string,
-  className?: string,
+  type?: "submit" | "reset" | "button" | undefined,
   text?: string,
-  type?: "submit" | "reset" | "button" | undefined
+  className?: string,
 }
 
-const Button = ({id, className, text, type}: ButtonProps) => {
+const Button = ({id, type, text, className}: ButtonProps) => {
   return (
-    <button id={id} className={`btn ${className}`} type={type}>{text}</button>
+    <button id={id} type={type} className={`btn ${className}`}>{text}</button>
   )
 };
 

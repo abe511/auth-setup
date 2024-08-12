@@ -4,7 +4,6 @@ main {
   height: 100%;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
-  /* position: absolute; */
 }
 
 #login-modal-wrapper {

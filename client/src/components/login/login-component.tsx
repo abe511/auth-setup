@@ -1,3 +1,4 @@
+import Button from "../button/button-component";
 import "./login-style.css";
 
 const Login = () => {
@@ -14,8 +15,8 @@ const Login = () => {
           <input id="password" name="password" type="password" />
         </fieldset>
         <div id="login-button-wrapper">
-          <button id="login-cancel-btn"type="button">Cancel</button>
-          <button id="login-submit-btn" type="button">Login</button>
+          <Button id="login-cancel-btn" type="button" text="Cancel" className="secondary" />
+          <Button id="login-submit-btn" type="button" text="Login" className="primary" />
         </div>
       </form>
     </article>

@@ -44,27 +44,3 @@
   justify-content: right;
   gap: 1rem;
 }
-
-#login-form button {
-  padding: 0.2rem;
-  border: 2px solid #66837E;
-  border-radius: 0.5rem;
-  font-size: 1.25rem;
-  min-width: fit-content;
-  width: 40%;
-}
-
-#login-form button:hover {
-  color: white;
-  background-color: #66837E;
-}
-
-#login-form button:active {
-  color: #66837E;
-  background-color: white;
-}
-
-#login-submit-btn {
-  color: white;
-  background-color: #66837E;
-}
