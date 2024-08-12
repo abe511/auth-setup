@@ -1,0 +1,25 @@
+
+.btn {
+  padding: 0.2rem 1rem;
+  border: 2px solid #66837E;
+  border-radius: 0.5rem;
+  font-size: 1.25rem;
+  min-width: fit-content;
+  /* width: 40%; */
+}
+
+.btn:hover {
+  color: white;
+  background-color: #66837E;
+}
+
+.btn.primary {
+  color: white;
+  background-color: #66837E;
+}
+
+.btn.primary:active {
+  color: #66837E;
+  background-color: white;
+}
+
