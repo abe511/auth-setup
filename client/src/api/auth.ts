@@ -49,6 +49,6 @@ export const getUserProfile = async (token: string): Promise<string | Error | nu
     if (err instanceof Error) {
       return err.message;
     }
-    throw err;
+    return new Error("Unknown error"); // CHECK THIS RETURN VALUE
   }
 }
