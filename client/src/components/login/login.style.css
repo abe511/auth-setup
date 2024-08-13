@@ -1,4 +1,12 @@
 
+#login-modal-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  z-index: 1000;
+}
+
 #login-form {
   display: flex;
   flex-direction: column;

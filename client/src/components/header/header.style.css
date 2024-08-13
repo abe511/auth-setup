@@ -29,3 +29,9 @@ nav {
   color: white;
   background-color: #66837E;
 }
+
+.icon.user-profile {
+  fill: #66837E;
+  width: 3rem;
+  height: 3rem;
+}

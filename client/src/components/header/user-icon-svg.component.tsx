@@ -2,6 +2,7 @@ import { SVGProps } from "react";
 
 const UserIconSvg = (props: SVGProps<SVGSVGElement>) => (
   <svg
+    className="icon user-profile"
     xmlns="http://www.w3.org/2000/svg"
     xmlSpace="preserve"
     width={800}
