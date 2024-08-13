@@ -2,6 +2,9 @@
 ## a simple auth setup in go and typescript
 
 
+[**demo**](https://auth-client-rppr.onrender.com) *(wait a bit for the servers to spin up)*
+
+
 ### Clone this repo
 
 `git clone git@github.com:abe511/auth-setup.git`
