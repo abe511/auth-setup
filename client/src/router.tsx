@@ -5,6 +5,8 @@ import Contact from "./components/pages/contact/contact.component";
 import Login from "./components/login/login.component";
 import UserProfile from "./components/pages/user-profile/user-profile.component";
 import RootLayout from "./components/root-layout/root-layout.component";
+import loginAction from "./routes/loginAction";
+import userProfileLoader from "./routes/userProfileLoader";
 
 
 const router = createBrowserRouter([
@@ -26,11 +28,13 @@ const router = createBrowserRouter([
       },
       {
         path: "login",
-        element: <Login />
+        element: <Login />,
+        action: loginAction,
       },
       {
         path: "profile",
-        element: <UserProfile />
+        element: <UserProfile />,
+        loader: userProfileLoader,
       }
     ]
   }

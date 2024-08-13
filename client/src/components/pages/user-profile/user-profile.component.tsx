@@ -1,9 +1,17 @@
+import { useLoaderData } from "react-router-dom";
+
+type User = {
+  email: string,
+  username: string,
+}
 
 const UserProfile = () => {
+  const userData = useLoaderData() as User;
+
   return (
     <section>
-      <p>username</p>
-      <p>email</p>
+      <p>{userData.username}</p>
+      <p>{userData.email}</p>
     </section>
   )
 }
