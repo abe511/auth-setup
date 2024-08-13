@@ -1,11 +1,12 @@
 package main
 
 import (
+	"auth/handlers"
+	"auth/database"
+	"auth/utils"
 	"fmt"
 	"log"
 	"net/http"
-	"auth/handlers"
-	"auth/database"
 )
 
 
@@ -17,10 +18,12 @@ func main() {
 
 	router.HandleFunc("POST /login", handlers.LoginHandler)
 	router.HandleFunc("GET /profile", handlers.AuthMiddleware(handlers.GetProfile))
+	
+	corsEnabledRouter := utils.GlobalCORS(router)
 
 	server := http.Server{
 		Addr: ":8080",
-		Handler: router,
+		Handler: corsEnabledRouter,
 	}
 
 	fmt.Printf("Server running on port: %v\n", server.Addr)
